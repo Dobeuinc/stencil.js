@@ -72,6 +72,7 @@ export const loadConfig = async (init: LoadConfigInit = {}): Promise<LoadConfigR
       unknownConfig.config.rootDir = normalizePath(sys.getCurrentDirectory());
     }
 
+    // TODO(NOW): How has this ever worked?
     unknownConfig.config.sys = sys;
 
     const validated = validateConfig(unknownConfig.config, init);
