@@ -171,9 +171,9 @@ export function mockCompilerCtx(config?: Config) {
   return compilerCtx;
 }
 
-export function mockBuildCtx(config?: Config, compilerCtx?: CompilerCtx): BuildCtx {
+export function mockBuildCtx(config?: ValidatedConfig, compilerCtx?: CompilerCtx): BuildCtx {
   if (!config) {
-    config = mockConfig();
+    config = mockValidatedConfig();
   }
   if (!compilerCtx) {
     compilerCtx = mockCompilerCtx(config);

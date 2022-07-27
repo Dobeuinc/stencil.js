@@ -1,7 +1,7 @@
 import type * as d from '@stencil/core/declarations';
 import { convertDecoratorsToStatic } from '../decorators-to-static/convert-decorators';
 import { convertStaticToMeta } from '../static-to-meta/visitor';
-import { mockBuildCtx, mockCompilerCtx, mockConfig } from '@stencil/core/testing';
+import { mockBuildCtx, mockCompilerCtx, mockValidatedConfig } from '@stencil/core/testing';
 import ts from 'typescript';
 import { updateModule } from '../static-to-meta/parse-static';
 import { getScriptTarget } from '../transform-utils';
@@ -17,7 +17,7 @@ import { getScriptTarget } from '../transform-utils';
  */
 export function transpileModule(
   input: string,
-  config?: d.Config,
+  config?: d.ValidatedConfig,
   compilerCtx?: d.CompilerCtx,
   beforeTransformers: ts.TransformerFactory<ts.SourceFile>[] = [],
   afterTransformers: ts.TransformerFactory<ts.SourceFile>[] = []
@@ -79,7 +79,7 @@ export function transpileModule(
   const tsProgram = ts.createProgram([inputFileName], options, compilerHost);
   const tsTypeChecker = tsProgram.getTypeChecker();
 
-  config = config || mockConfig();
+  config = config || mockValidatedConfig();
   compilerCtx = compilerCtx || mockCompilerCtx(config);
 
   const buildCtx = mockBuildCtx(config, compilerCtx);

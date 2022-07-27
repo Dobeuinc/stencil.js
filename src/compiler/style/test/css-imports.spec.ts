@@ -6,7 +6,7 @@ import {
   parseCssImports,
   replaceImportDeclarations,
 } from '../css-imports';
-import { mockBuildCtx, mockConfig, mockCompilerCtx } from '@stencil/core/testing';
+import { mockBuildCtx, mockCompilerCtx, mockValidatedConfig } from '@stencil/core/testing';
 import { buildError, normalizePath } from '@utils';
 import path from 'path';
 
@@ -14,13 +14,13 @@ describe('css-imports', () => {
   const root = path.resolve('/');
   let compilerCtx: d.CompilerCtx;
   let buildCtx: d.BuildCtx;
-  let config: d.Config;
+  let config: d.ValidatedConfig;
   let readFileMock: jest.SpyInstance<Promise<string>, [string, d.FsReadOptions?]>;
 
   beforeEach(() => {
+    config = mockValidatedConfig();
     compilerCtx = mockCompilerCtx(config);
     buildCtx = mockBuildCtx(config, compilerCtx);
-    config = mockConfig();
     readFileMock = jest.spyOn(compilerCtx.fs, 'readFile');
   });
 
